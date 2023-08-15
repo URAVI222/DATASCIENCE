@@ -1,0 +1,17 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the unemployment data from a CSV file
+unemployment_data = pd.read_csv('unemployment_data.csv')
+
+# Calculate the unemployment rate
+unemployment_data['Unemployment Rate'] = (unemployment_data['Unemployed'] / unemployment_data['Labour Force']) * 100
+
+# Plot the unemployment rate over time
+plt.figure(figsize=(10, 6))
+plt.plot(unemployment_data['Year'], unemployment_data['Unemployment Rate'])
+plt.xlabel('Year')
+plt.ylabel('Unemployment Rate (%)')
+plt.title('Unemployment Rate Over Time')
+plt.grid(True)
+plt.show()
