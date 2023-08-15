@@ -1,0 +1,28 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
+
+# Load the sales data from a CSV file
+sales_data = pd.read_csv('sales_data.csv')
+
+# Prepare the feature matrix and target variable
+X = sales_data[['Advertising Cost', 'Target Segment', 'Advertising Platform']]
+y = sales_data['Sales']
+
+# Convert categorical variables into numerical using one-hot encoding
+X = pd.get_dummies(X)
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Train the linear regression model
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+# Make predictions on the test set
+y_pred = model.predict(X_test)
+
+# Evaluate the model using mean squared error
+mse = mean_squared_error(y_test, y_pred)
+print('Mean Squared Error:', mse)
